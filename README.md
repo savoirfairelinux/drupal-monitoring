@@ -36,7 +36,8 @@ make drupal
 ```
 
 
-Now, everything is up and running.
+Now, everything is up and running. However, you'll have to wait about one minute before the
+Drupal host and services are sent and monitored by Alignak
 
 Bansho : `localhost:8888`
 
