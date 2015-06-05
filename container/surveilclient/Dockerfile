@@ -6,4 +6,4 @@ RUN pip install python-surveilclient==0.5.1
 
 COPY ./init.sh /init.sh
 
-CMD /init.sh
+CMD sleep 60 && /init.sh

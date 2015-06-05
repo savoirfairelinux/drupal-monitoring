@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export SURVEIL_API_URL=http://surveil/v2
-export SURVEIL_AUTH_URL=http://surveil/v2/auth
+export SURVEIL_API_URL=http://surveil:8080/v2
+export SURVEIL_AUTH_URL=http://surveil:8080/v2/auth
 
 echo Ajout du host drupal
 surveil config-host-delete --host_name drupal 
@@ -136,3 +136,7 @@ surveil config-service-create --host_name drupal \
 surveil config-reload
 
 echo Script termine
+
+while true; do
+	sleep 60
+done
