@@ -1,0 +1,36 @@
+# Containers stack for the Bansho drupal module
+
+This project provides the full stack needed for the Bansho drupal module development.
+
+## Usage
+
+First of all, build the stack :
+
+`docker-compose build`
+
+Then, start it :
+
+`docker-compose up`
+
+As the Drupal container needs to initialize itself and create a database,
+the first time you'll run it, it will stop. Once stopped, start it again :
+
+`docker-compose up`
+
+After that, you need to clone the Bansho project where ever you want :
+
+`git clone git@github.com:stackforge/bansho.git`
+
+Then, from the Bansho directory, run :
+
+`make drupal`
+
+Now, everything is up and running.
+
+Bansho : `localhost:8888`
+
+Drupal : `localhost:80`
+
+Alignak : `localhost:7767`
+
+Surveil : `localhost:8080`
