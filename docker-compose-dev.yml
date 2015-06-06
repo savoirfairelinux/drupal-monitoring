@@ -27,6 +27,15 @@ drupal:
   volumes:
     - /var/www/html/sites
     - /var/www/private
+    - ../monitoring-tools/plugins/check-drupal-cache:/opt/drupal_cache
+    - ../monitoring-tools/plugins/check-drupal-codebase:/opt/drupal_codebase
+    - ../monitoring-tools/plugins/check-drupal-cron:/opt/drupal_cron
+    - ../monitoring-tools/plugins/check-drupal-database:/opt/drupal_database
+    - ../monitoring-tools/plugins/check-drupal-extensions:/opt/drupal_extensions
+    - ../monitoring-tools/plugins/check-drupal-logging:/opt/drupal_logging
+    - ../monitoring-tools/plugins/check-drupal-security:/opt/drupal_security
+    - ../monitoring-tools/plugins/check-drupal-status:/opt/drupal_status
+    - ../monitoring-tools/plugins/check-drupal-views:/opt/drupal_views
   environment:
     - UPLOAD_LIMIT=20M
     - MEMORY_LIMIT=128M
