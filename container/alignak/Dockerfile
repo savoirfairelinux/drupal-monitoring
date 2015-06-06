@@ -1,4 +1,4 @@
-FROM savoirfairelinux/surveil-alignak:0.4.4
+FROM savoirfairelinux/surveil-alignak:0.7.0
 MAINTAINER Frédéric Vachon <frederic.vachon@savoirfairelinux.com>
 
 RUN apt-get update && \
@@ -6,9 +6,7 @@ RUN apt-get update && \
 	pear channel-discover pear.drush.org && \
 	pear install drush/drush
 
-RUN useradd -m alignak
-
-RUN apt-get update && apt-get install sudo openssh-client
+RUN apt-get update && apt-get install -y sudo openssh-client
 
 USER alignak
 COPY drupal.aliases.drushrc.php /home/alignak/.drush/drupal.aliases.drushrc.php
