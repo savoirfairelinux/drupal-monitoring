@@ -59,7 +59,6 @@ influxdb:
     PRE_CREATE_DB: "db"
   ports:
     - "8083:8083"
-    - "8086:8086"
   volumes:
    - ./container-data/influxdb:/data
 
