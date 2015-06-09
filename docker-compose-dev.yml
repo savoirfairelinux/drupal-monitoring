@@ -19,7 +19,7 @@ alignak:
     - "7767:7767"
 
 drupal:
-  build: container/drupal
+  image: savoirfairelinux/drupal-nrpe-docker:0.4.0
   links:
     - db:mysql
   ports:
