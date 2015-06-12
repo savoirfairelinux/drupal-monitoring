@@ -1,8 +1,9 @@
-FROM ubuntu:trusty
+FROM savoirfairelinux/surveil:0.7.0
 MAINTAINER Frédéric Vachon <frederic.vachon@savoirfairelinux.com>
 
-RUN apt-get update && apt-get install -y openssh-server python-pip python-dev
-RUN pip install python-surveilclient==0.5.1
+RUN apt-get install -y subversion && \
+	svn checkout https://github.com/savoirfairelinux/monitoring-tools/branches/drupal/packs/linux-drupal /packs/linux-drupal && \
+	apt-get remove -y subversion
 
 COPY ./init.sh /init.sh
 

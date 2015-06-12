@@ -96,4 +96,4 @@ surveilclient:
   build: container/surveilclient/
   links:
     - surveil
-    - drupal
+    - mongo
