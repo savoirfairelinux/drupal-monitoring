@@ -69,15 +69,11 @@ RUN cd /plugins/drupal_views \
 USER alignak
 
 COPY drupal.aliases.drushrc.php /home/alignak/.drush/drupal.aliases.drushrc.php
-COPY ssh /home/alignak/.ssh
 
-RUN eval `ssh-agent` ssh-add
+COPY ssh/config /home/alignak/.ssh/config
 
 USER root
 RUN drush
 RUN chown -R alignak:alignak /home/alignak
-RUN chmod 700 /home/alignak/.ssh
-RUN chmod 600 /home/alignak/.ssh/id_rsa
-RUN chmod 600 /home/alignak/.ssh/id_rsa.pub
 
-CMD /usr/bin/supervisord                                                                                                  
+CMD sudo -H -u alignak bash -c "echo 'ssh-add' | exec ssh-agent bash" && /usr/bin/supervisord
