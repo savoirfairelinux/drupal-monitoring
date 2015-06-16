@@ -39,31 +39,31 @@ RUN /opt/drupalplugins/env/bin/pip install "pbr>=0.6,!=0.7,<1.0" shinkenplugins
 ## Install Plugins
 RUN mkdir -p /usr/lib/alignak/plugins
 RUN cd /plugins/drupal_cache \
-	&& sudo /opt/drupalplugins/env/bin/python setup.py install  \
+	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
 	&& ln -s /opt/drupalplugins/env/bin/check_drupal_cache /usr/lib/alignak/plugins/
 RUN cd /plugins/drupal_codebase \
-	&& sudo /opt/drupalplugins/env/bin/python setup.py install  \
+	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
 	&& ln -s /opt/drupalplugins/env/bin/check_drupal_codebase /usr/lib/alignak/plugins/
 RUN cd /plugins/drupal_cron \
-	&& sudo /opt/drupalplugins/env/bin/python setup.py install  \
+	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
 	&& ln -s /opt/drupalplugins/env/bin/check_drupal_cron /usr/lib/alignak/plugins/
 RUN cd /plugins/drupal_database \
-	&& sudo /opt/drupalplugins/env/bin/python setup.py install  \
+	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
 	&& ln -s /opt/drupalplugins/env/bin/check_drupal_database /usr/lib/alignak/plugins/
 RUN cd /plugins/drupal_extensions \
-	&& sudo /opt/drupalplugins/env/bin/python setup.py install  \
+	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
 	&& ln -s /opt/drupalplugins/env/bin/check_drupal_extensions /usr/lib/alignak/plugins/
 RUN cd /plugins/drupal_logging \
-	&& sudo /opt/drupalplugins/env/bin/python setup.py install  \
+	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
 	&& ln -s /opt/drupalplugins/env/bin/check_drupal_logging /usr/lib/alignak/plugins/
 RUN cd /plugins/drupal_security \
-	&& sudo /opt/drupalplugins/env/bin/python setup.py install  \
+	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
 	&& ln -s /opt/drupalplugins/env/bin/check_drupal_security /usr/lib/alignak/plugins/
 RUN cd /plugins/drupal_status \
-	&& sudo /opt/drupalplugins/env/bin/python setup.py install  \
+	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
 	&& ln -s /opt/drupalplugins/env/bin/check_drupal_status /usr/lib/alignak/plugins/
 RUN cd /plugins/drupal_views \
-	&& sudo /opt/drupalplugins/env/bin/python setup.py install  \
+	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
 	&& ln -s /opt/drupalplugins/env/bin/check_drupal_views /usr/lib/alignak/plugins/
 
 USER alignak

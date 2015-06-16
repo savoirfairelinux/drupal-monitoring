@@ -7,7 +7,9 @@ surveil:
   ports:
    - "8080:8080"
   environment:
-    PBR_VERSION: "PROD"
+    PBR_VERSION: "DEV"
+  command:
+    bash -c "cd /opt/surveil && ./setup.sh && /opt/surveil/env/bin/python setup.py develop && sleep 20 && surveil-api"
 
 alignak:
   build: container/alignak/
@@ -18,15 +20,15 @@ alignak:
   ports:
     - "7767:7767"
   volumes:
-    - ../monitoring-tools/plugins/check-drupal-cache:/opt/drupal_cache
-    - ../monitoring-tools/plugins/check-drupal-codebase:/opt/drupal_codebase
-    - ../monitoring-tools/plugins/check-drupal-cron:/opt/drupal_cron
-    - ../monitoring-tools/plugins/check-drupal-database:/opt/drupal_database
-    - ../monitoring-tools/plugins/check-drupal-extensions:/opt/drupal_extensions
-    - ../monitoring-tools/plugins/check-drupal-logging:/opt/drupal_logging
-    - ../monitoring-tools/plugins/check-drupal-security:/opt/drupal_security
-    - ../monitoring-tools/plugins/check-drupal-status:/opt/drupal_status
-    - ../monitoring-tools/plugins/check-drupal-views:/opt/drupal_views
+    - ../monitoring-tools/plugins/check-drupal-cache:/plugins/drupal_cache
+    - ../monitoring-tools/plugins/check-drupal-codebase:/plugins/drupal_codebase
+    - ../monitoring-tools/plugins/check-drupal-cron:/plugins/drupal_cron
+    - ../monitoring-tools/plugins/check-drupal-database:/plugins/drupal_database
+    - ../monitoring-tools/plugins/check-drupal-extensions:/plugins/drupal_extensions
+    - ../monitoring-tools/plugins/check-drupal-logging:/plugins/drupal_logging
+    - ../monitoring-tools/plugins/check-drupal-security:/plugins/drupal_security
+    - ../monitoring-tools/plugins/check-drupal-status:/plugins/drupal_status
+    - ../monitoring-tools/plugins/check-drupal-views:/plugins/drupal_views
 
 drupal:
   image: savoirfairelinux/drupal-nrpe-docker:0.4.0
@@ -59,9 +61,7 @@ mongo:
   ports:
    - "27017:27017"
   command:
-      "mongod --smallfiles"
-  volumes:
-   - ./container-data/mongodb:/data/db
+      "mongod --nojournal --smallfiles"
 
 influxdb:
   image: savoirfairelinux/influxdb:0.9.0-rc30
@@ -69,8 +69,6 @@ influxdb:
     PRE_CREATE_DB: "db"
   ports:
     - "8083:8083"
-  volumes:
-   - ./container-data/influxdb:/data
 
 grafana:
   image: savoirfairelinux/grafana:2.0.2
