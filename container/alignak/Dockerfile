@@ -74,6 +74,7 @@ COPY ssh /home/alignak/.ssh
 RUN eval `ssh-agent` ssh-add
 
 USER root
+RUN drush
 RUN chown -R alignak:alignak /home/alignak
 RUN chmod 700 /home/alignak/.ssh
 RUN chmod 600 /home/alignak/.ssh/id_rsa
