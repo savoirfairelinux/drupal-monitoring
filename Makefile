@@ -1,6 +1,6 @@
 PROJECT=$(shell pwd)
 
-all: remove build run
+all: remove build develop
 
 clean: kill remove
 
