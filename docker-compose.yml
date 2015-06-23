@@ -31,6 +31,9 @@ alignak:
     - ../monitoring-tools/plugins/check-drupal-security:/plugins/drupal_security
     - ../monitoring-tools/plugins/check-drupal-status:/plugins/drupal_status
     - ../monitoring-tools/plugins/check-drupal-views:/plugins/drupal_views
+    - ../monitoring-tools/plugins/check-drupal-jenkins:/plugins/drupal_jenkins
+    - ../monitoring-tools/plugins/check-http-load:/plugins/http_load
+    - ../monitoring-tools/plugins/check-selenium:/plugins/selenium
 
 drupal:
   image: savoirfairelinux/drupal-nrpe-docker:0.5.0
@@ -98,3 +101,5 @@ surveilclient:
   links:
     - surveil
     - mongo
+  volumes:
+    - ../monitoring-tools/packs/linux-drupal/:/packs/linux-drupal/

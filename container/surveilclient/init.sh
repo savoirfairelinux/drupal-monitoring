@@ -11,7 +11,7 @@ surveil config-host-delete --host_name drupal
 surveil config-host-create --host_name drupal \
                            --address drupal \
                            --use linux-drupal \
-                           --custom_fields '{"_DRUPAL_OPTION":"-a @drupal -d /home/alignak/"}'
+                           --custom_fields '{"_DRUPAL_OPTIONS":"-a @drupal -d /home/alignak/", "_JENKINS_OPTIONS": "-u http://jenkins.nodejs.org/job/node-build-ubuntu-12.04", "_HTTP_LOAD_OPTIONS": "-u http://drupal -n 10 -q 4 -m 0"}'
 
 surveil config-reload
 
