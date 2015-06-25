@@ -11,13 +11,13 @@ class Drupal(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost/"
+        self.base_url = "http://drupal/"
         self.verificationErrors = []
         self.accept_next_alert = True
     
     def test_drupal(self):
         driver = self.driver
-        driver.get("http://localhost/")
+        driver.get("http://drupal/")
         for i in range(60):
             try:
                 if "Welcome to default" == driver.find_element_by_id("page-title").text: break
