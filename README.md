@@ -15,7 +15,62 @@ to manage the stack.
 
 ### Production
 
-The production setup is meant to be used for demonstration purposes.
+To deploy drupal monitoring using containers, these are the steps you need to follow:
+
+The Alignak container needs a RSA private key to use remote drush on the Drupal server.
+
+Put the private key in `container/alignak/ssh`. This directory will be mounted at
+
+runtime in `/home/alignak`. 
+
+Also, put the aliases config files used from remote drush call in `container/alignak/aliases`.
+
+The Alignak container also needs a selenium scenario in order to perform a selenium check.
+
+More informations about how to record a scenario is available there :
+
+```
+http://sfl-monitoring-tools.readthedocs.org/en/latest/plugins/check-selenium/plugin-check_selenium.html
+```
+
+
+Then, you need to configure the monitoring system by editing docker-compose-production.yml.
+
+In the surveilclient entry, set environment variables accordingly.
+
++-------------------+-------------------------------------------------+
+|      VARIABLE     |                    MEANING                      |
++===================+=================================================+
+| HOST_ADDR         | Host address to monitor                         |
++-------------------+-------------------------------------------------+
+| DRUPAL_ALIAS      | Alias name that drush will use                  |
++-------------------+-------------------------------------------------+
+| JENKINS           | The jenkins job URL                             |
++-------------------+-------------------------------------------------+
+| SELENIUM_SCENARIO | The selenium scenario name (without .py)        |
++-------------------+-------------------------------------------------+
+
+That way, it is only possible to configure a single host. However, if you
+
+want to configure more that one host, you'll have to edit the `init.sh`
+
+file that you can find in `container/surveilclient/`. Copy and paste
+
+surveil config-host-create command to add more host. The options are 
+
+pretty straight forward. If you need more information about the
+
+custom fields, they are defined in linux-drupal pack that is hosted 
+
+there :
+
+```
+https://github.com/savoirfairelinux/monitoring-tools
+```
+
+
+Once everything is setup, your ready to start the stack.
+
 
 To start the stack :
 
@@ -23,21 +78,32 @@ To start the stack :
 make production
 ```
 
-The webui used to display data is Bansho. You'll need to clone this project :
+You need to wait a little more that one minute before the monitoring system is properly configured.
 
-``` bash
-git clone git@github.com:stackforge/bansho.git
+Then, the monitoring system needs to perform his first checks. You can force that via the Alignak
+
+webui at : 
+
+```
+localhost:7767/all
 ```
 
-Once your stack is running, go into the Banso project root directory and run :
+Once the checks first checks have been performed, access the Bansho webui :
 
-
-``` bash
-make drupal
+```
+localhost:8080/view?view=drupalDashboard
 ```
 
-The Bansho container will link to the drupal monitoring stack.
+This is the webui URL to access the Drupal ui.
 
+
+Please note that there's some persitent data (for mongo and influxDB) located in the
+
+`container-data` directory which you can delete if you want a fresh start.
+
+``` bash
+make remove-data
+```
 
 
 ### Development
