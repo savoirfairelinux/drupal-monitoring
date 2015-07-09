@@ -87,12 +87,10 @@ RUN cd /plugins/selenium \
 
 USER alignak
 
-COPY scenarios/drupal /plugins/selenium/scenarios/
-COPY scenarios/drupal.py /plugins/selenium/scenarios/
+COPY scenarios/*.py /plugins/selenium/scenarios/
+COPY aliases/*.php /home/alignak/.drush/
 
-COPY drupal.aliases.drushrc.php /home/alignak/.drush/drupal.aliases.drushrc.php
-
-COPY ssh/config /home/alignak/.ssh/config
+#COPY ssh/config /home/alignak/.ssh/config
 
 USER root
 RUN drush

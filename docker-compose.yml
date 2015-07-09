@@ -22,6 +22,7 @@ alignak:
   volumes:
     - ./gen/.ssh/id_rsa:/home/alignak/.ssh/id_rsa
     - ./gen/.ssh/id_rsa.pub:/home/alignak/.ssh/id_rsa.pub
+    - ./container/alignak/.ssh/config:/home/alignak/.ssh/config
     - ../monitoring-tools/plugins/check-drupal-cache:/plugins/drupal_cache
     - ../monitoring-tools/plugins/check-drupal-codebase:/plugins/drupal_codebase
     - ../monitoring-tools/plugins/check-drupal-cron:/plugins/drupal_cron
@@ -103,3 +104,8 @@ surveilclient:
     - mongo
   volumes:
     - ../monitoring-tools/packs/linux-drupal/:/packs/linux-drupal/
+  environment:
+    HOST_ADDR: "sfl-multisite-staging.savoirfairelinux.net"
+    DRUPAL_ALIAS: "@drupal"
+    JENKINS: "http://jenkins.nodejs.org/job/node-build-ubuntu-12.04"
+    SELENIUM_SCENARIO: "drupal"

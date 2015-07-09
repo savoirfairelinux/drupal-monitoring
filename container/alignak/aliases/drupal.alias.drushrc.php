@@ -9,5 +9,4 @@ $aliases['drupal'] = array (
     '%drush' => '/home/nagios/.composer/vendor/drush/drush',
     '%site' => 'sites/default/'
   )
-)
-?>
+);

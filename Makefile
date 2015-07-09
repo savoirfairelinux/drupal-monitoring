@@ -18,10 +18,10 @@ develop:
 
 production:
 	sudo docker-compose -f docker-compose-production.yml build
-	rm -rf $(PROJECT)/gen/.ssh/
-	mkdir -p $(PROJECT)/gen/.ssh/
-	ssh-keygen -N "" -f $(PROJECT)/gen/.ssh/id_rsa
 	sudo docker-compose -f docker-compose-production.yml up 
+
+remove-data:
+	sudo rm -rf ./container-data/
 
 kill:
 	sudo docker-compose kill
