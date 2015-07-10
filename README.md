@@ -38,17 +38,14 @@ Then, you need to configure the monitoring system by editing docker-compose-prod
 
 In the surveilclient entry, set environment variables accordingly.
 
-+-------------------+-------------------------------------------------+
+
 |      VARIABLE     |                    MEANING                      |
-+===================+=================================================+
+|-------------------|:-----------------------------------------------:|
 | HOST_ADDR         | Host address to monitor                         |
-+-------------------+-------------------------------------------------+
 | DRUPAL_ALIAS      | Alias name that drush will use                  |
-+-------------------+-------------------------------------------------+
 | JENKINS           | The jenkins job URL                             |
-+-------------------+-------------------------------------------------+
 | SELENIUM_SCENARIO | The selenium scenario name (without .py)        |
-+-------------------+-------------------------------------------------+
+
 
 That way, it is only possible to configure a single host. However, if you
 
@@ -91,7 +88,7 @@ localhost:7767/all
 Once the checks first checks have been performed, access the Bansho webui :
 
 ```
-localhost:8080/view?view=drupalDashboard
+localhost:80/view?view=drupalDashboard
 ```
 
 This is the webui URL to access the Drupal ui.
