@@ -1,11 +1,11 @@
 surveil:
-  image: savoirfairelinux/surveil:0.7.0
+  image: surveil/surveil:0.13.1
   links:
    - mongo
    - influxdb
    - alignak
   ports:
-   - "8080:8080"
+   - "5311:5311"
   environment:
     PBR_VERSION: "PROD"
   command:
@@ -16,11 +16,10 @@ alignak:
   links:
     - mongo
     - influxdb
-    - drupal
   ports:
     - "7767:7767"
   volumes:
-    - ./container/alignak/.ssh:/home/alignak/.ssh
+    - ./container/alignak/ssh:/home/alignak/.ssh
 
 mongo:
   image: mongo
@@ -32,7 +31,7 @@ mongo:
     - ./container-data/mongodb:/data/db
 
 influxdb:
-  image: savoirfairelinux/influxdb:0.9.0-rc30
+  image: surveil/influxdb:0.9.1
   environment:
     PRE_CREATE_DB: "db"
   ports:
@@ -43,13 +42,9 @@ influxdb:
 grafana:
   image: savoirfairelinux/grafana:2.0.2
   environment:
-    INFLUXDB_HOST: "influxdb"
-    INFLUXDB_PORT: "8086"
-    INFLUXDB_NAME: "db"
-    INFLUXDB_USER: "root"
-    INFLUXDB_PASS: "root"
-  ports:
-    - "8887:80"
+    GRAFANA_ROOT_URL: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
+    GRAFANA_AUTH_PROXY_ENABLED: true
+    GRAFANA_AUTH_PROXY_HEADER_NAME: grafana-user
   links:
     - influxdb
 
@@ -61,11 +56,11 @@ surveilclient:
   environment:
     HOST_ADDR: "drupal"
     DRUPAL_ALIAS: "@drupal"
-    JENKINS: "http://jenkins.nodejs.org/job/node-build-ubuntu-12.04"
+    JENKINS: "http://jenkins-host/job/thejob/"
     SELENIUM_SCENARIO: "drupal"
 
 bansho:
-  image: savoirfairelinux/bansho:0.8.0
+  image: surveil/bansho:0.14.0
   environment:
     BANSHO_BACKEND: "surveil"
     INFLUXDB_HOST: "influxdb"
@@ -74,7 +69,7 @@ bansho:
     INFLUXDB_USER: "root"
     INFLUXDB_PASS: "root"
   ports:
-    - "8888:8888"
+    - "80:8888"
   links:
     - surveil
     - grafana

@@ -1,4 +1,4 @@
-FROM savoirfairelinux/surveil-alignak:0.7.0
+FROM surveil/surveil-alignak:0.13.1
 MAINTAINER Frédéric Vachon <frederic.vachon@savoirfairelinux.com>
 
 RUN apt-get update && \
@@ -46,44 +46,43 @@ ENV PATH=$PATH:/opt/drupalplugins/env/bin
 RUN /opt/drupalplugins/env/bin/pip install "pbr>=0.6,!=0.7,<1.0" shinkenplugins
 
 ## Install Plugins
-RUN mkdir -p /usr/lib/alignak/plugins
 RUN cd /plugins/drupal_cache \
 	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
-	&& ln -s /opt/drupalplugins/env/bin/check_drupal_cache /usr/lib/alignak/plugins/
+	&& ln -s /opt/drupalplugins/env/bin/check_drupal_cache /usr/lib/monitoring/plugins/
 RUN cd /plugins/drupal_codebase \
 	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
-	&& ln -s /opt/drupalplugins/env/bin/check_drupal_codebase /usr/lib/alignak/plugins/
+	&& ln -s /opt/drupalplugins/env/bin/check_drupal_codebase /usr/lib/monitoring/plugins/
 RUN cd /plugins/drupal_cron \
 	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
-	&& ln -s /opt/drupalplugins/env/bin/check_drupal_cron /usr/lib/alignak/plugins/
+	&& ln -s /opt/drupalplugins/env/bin/check_drupal_cron /usr/lib/monitoring/plugins/
 RUN cd /plugins/drupal_database \
 	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
-	&& ln -s /opt/drupalplugins/env/bin/check_drupal_database /usr/lib/alignak/plugins/
+	&& ln -s /opt/drupalplugins/env/bin/check_drupal_database /usr/lib/monitoring/plugins/
 RUN cd /plugins/drupal_extensions \
 	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
-	&& ln -s /opt/drupalplugins/env/bin/check_drupal_extensions /usr/lib/alignak/plugins/
+	&& ln -s /opt/drupalplugins/env/bin/check_drupal_extensions /usr/lib/monitoring/plugins/
 RUN cd /plugins/drupal_logging \
 	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
-	&& ln -s /opt/drupalplugins/env/bin/check_drupal_logging /usr/lib/alignak/plugins/
+	&& ln -s /opt/drupalplugins/env/bin/check_drupal_logging /usr/lib/monitoring/plugins/
 RUN cd /plugins/drupal_security \
 	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
-	&& ln -s /opt/drupalplugins/env/bin/check_drupal_security /usr/lib/alignak/plugins/
+	&& ln -s /opt/drupalplugins/env/bin/check_drupal_security /usr/lib/monitoring/plugins/
 RUN cd /plugins/drupal_status \
 	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
-	&& ln -s /opt/drupalplugins/env/bin/check_drupal_status /usr/lib/alignak/plugins/
+	&& ln -s /opt/drupalplugins/env/bin/check_drupal_status /usr/lib/monitoring/plugins/
 RUN cd /plugins/drupal_views \
 	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
-	&& ln -s /opt/drupalplugins/env/bin/check_drupal_views /usr/lib/alignak/plugins/
+	&& ln -s /opt/drupalplugins/env/bin/check_drupal_views /usr/lib/monitoring/plugins/
 RUN cd /plugins/drupal_jenkins \
 	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
-	&& ln -s /opt/drupalplugins/env/bin/check_drupal_jenkins /usr/lib/alignak/plugins/
+	&& ln -s /opt/drupalplugins/env/bin/check_drupal_jenkins /usr/lib/monitoring/plugins/
 RUN cd /plugins/http_load \
 	&& sudo /opt/drupalplugins/env/bin/python setup.py develop  \
-	&& ln -s /opt/drupalplugins/env/bin/check_http_load /usr/lib/alignak/plugins/
+	&& ln -s /opt/drupalplugins/env/bin/check_http_load /usr/lib/monitoring/plugins/
 RUN cd /plugins/selenium \
 	&& sudo pip install -r requirements.txt \
 	&& sudo pip install -U selenium \
-	&& ln -s /plugins/selenium/check_selenium /usr/lib/alignak/plugins/
+	&& ln -s /plugins/selenium/check_selenium /usr/lib/monitoring/plugins/
 
 USER alignak
 

@@ -1,4 +1,4 @@
-FROM savoirfairelinux/surveil:0.7.0
+FROM surveil/surveil:0.13.1
 MAINTAINER Frédéric Vachon <frederic.vachon@savoirfairelinux.com>
 
 RUN apt-get install -y subversion && \
