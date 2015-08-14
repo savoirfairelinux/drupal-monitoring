@@ -9,6 +9,32 @@ This project provides the full stack needed for the Bansho drupal module develop
 This stack is based on docker, so you'll need to install it.  As it's a multi-container setup, another tool called docker-compose is used by the Makefile entries to manage the stack.
 
 
+### Demo
+
+If you want to see what the project looks like, use the demonstration stack
+
+``` bash
+make build-demo
+make demo
+```
+
+The container stack will stop after initializing the Drupal site.
+You need to start it once again
+
+
+``` bash
+make demo
+```
+
+To access the webui :
+
+``` bash
+http://localhost:80/view?view=drupalDashboard
+```
+
+Wait a few minutes for the monitoring system to be configured and to gather data from its plugins.
+
+
 ### Production
 
 To deploy drupal monitoring using containers, these are the steps you need to follow:
