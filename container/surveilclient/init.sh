@@ -3,10 +3,10 @@
 export SURVEIL_API_URL=http://surveil:5311/v2
 export SURVEIL_AUTH_URL=http://surveil:5311/v2/auth
 
-echo Ajout du pack Drupal
+echo Adding drupal pack
 surveil-pack-upload --mongo-uri mongo /packs/linux-drupal/
 
-echo Ajout du host drupal
+echo Adding drupal host
 surveil config-host-delete --host_name drupal 
 surveil config-host-create --host_name drupal \
 	                       --address $HOST_ADDR \
@@ -15,7 +15,7 @@ surveil config-host-create --host_name drupal \
 
 surveil config-reload
 
-echo Script termine
+echo Script done
 
 while true; do
 	sleep 60
